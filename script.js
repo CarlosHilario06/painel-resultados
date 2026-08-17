@@ -258,6 +258,11 @@
     render([]);
   }
 
+  function deleteEntry(ts){
+    localStorage.removeItem(STORAGE_PREFIX + ts);
+    render(loadAllSnapshots());
+  }
+
   function renderKPIs(snap){
     document.getElementById('valGasto').textContent = fmtBRL(snap ? snap.gasto : null);
     document.getElementById('valRetorno').textContent = fmtUSD(snap ? snap.retorno : null);
@@ -374,7 +379,8 @@
       '<span class="entry-col">Retorno</span>' +
       '<span class="entry-col">Lucro</span>' +
       '<span class="entry-pct">%</span>' +
-      '<span class="entry-chevron"></span>';
+      '<span class="entry-chevron"></span>' +
+      '<span class="entry-delete-spacer"></span>';
     wrap.appendChild(header);
 
     const list = document.createElement('div');
@@ -391,7 +397,8 @@
         '<span class="entry-col retorno">' + fmtUSD(it.retorno) + '</span>' +
         '<span class="entry-col lucro' + (isNeg ? ' neg' : '') + '">' + fmtBRL(it.lucro) + '</span>' +
         '<span class="entry-pct">' + fmtPct(it.pct) + '</span>' +
-        '<span class="entry-chevron">▶</span>';
+        '<span class="entry-chevron">▶</span>' +
+        '<button class="entry-delete" title="Apagar esse lançamento">🗑</button>';
 
       const detail = document.createElement('div');
       detail.className = 'entry-detail';
@@ -405,6 +412,14 @@
         const willOpen = !row.classList.contains('open');
         row.classList.toggle('open', willOpen);
         detail.classList.toggle('open', willOpen);
+      });
+
+      const deleteBtn = row.querySelector('.entry-delete');
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (confirm('Apagar o lançamento de ' + time + '?')) {
+          deleteEntry(it.ts);
+        }
       });
 
       list.appendChild(row);

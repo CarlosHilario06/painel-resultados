@@ -152,6 +152,13 @@ input[type=file]{ display:none; }
   transition: transform .18s;
 }
 .entry-row.open .entry-chevron{ transform: rotate(90deg); }
+.entry-delete{
+  width: 26px; height: 26px; flex-shrink:0; border: none; background: transparent;
+  color: var(--muted); font-size: 13px; border-radius: 7px; cursor: pointer;
+  display:flex; align-items:center; justify-content:center; transition: background .12s, color .12s;
+}
+.entry-delete:hover{ background: var(--coral-soft); color: var(--coral); }
+.entry-delete-spacer{ width: 26px; flex-shrink:0; }
 
 .entry-detail{
   display:none; margin: 2px 4px 12px; padding: 14px 16px;
@@ -201,7 +208,7 @@ input[type=file]{ display:none; }
 
 .entry-header-row{
   display:flex; gap:14px; padding: 0 10px 6px; font-family: var(--mono); font-size: 10px;
-  letter-spacing:.06em; text-transform:uppercase; color: var(--muted);
+  letter-spacing:.06em; text-transform:uppercase; color: var(--muted); align-items:center;
 }
 .entry-header-row .entry-time{ width:108px; }
 .entry-header-row .entry-col{ flex:1; }
