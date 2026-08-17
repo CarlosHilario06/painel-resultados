@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Resultados</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">R</div>
+      <div>
+        <div class="brand-name">Painel de Resultados</div>
+        <div class="brand-sub" id="lastUpdated">Nenhum lançamento ainda</div>
+      </div>
+    </div>
+    <div class="status-pill idle" id="statusPill"><span class="dot"></span><span id="statusPillText">Aguardando CSV</span></div>
+  </div>
+
+  <div class="upload-card" id="dropZone">
+    <p>Arraste o <strong>CSV exportado da planilha</strong> aqui, ou clique para escolher o arquivo. Cada envio registra um novo snapshot do dia de hoje.</p>
+    <div>
+      <button class="btn" id="pickBtn">Enviar CSV</button>
+      <input type="file" id="fileInput" accept=".csv" />
+    </div>
+  </div>
+  <div class="status-msg" id="status"></div>
+
+  <div class="kpi-grid">
+    <div class="kpi gasto"><div class="label">Total Gasto</div><div class="value" id="valGasto">—</div></div>
+    <div class="kpi retorno"><div class="label">Total Retorno</div><div class="value" id="valRetorno">—</div></div>
+    <div class="kpi lucro">
+      <div class="label">Lucro Total</div>
+      <div class="value" id="valLucro">—</div>
+      <span class="badge pos" id="valPct" style="display:none;"></span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <p class="panel-title">Tendência do lucro</p>
+        <p class="panel-sub">Evolução entre os lançamentos de hoje</p>
+      </div>
+    </div>
+    <svg class="sparkline" id="sparkline" viewBox="0 0 600 72" preserveAspectRatio="none"></svg>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <p class="panel-title">Lançamentos</p>
+        <p class="panel-sub">Clique num horário pra inspecionar o ranking de países daquele momento</p>
+      </div>
+    </div>
+    <div id="ledgerWrap"><div class="empty">Envie um CSV para começar a registrar os horários.</div></div>
+    <button class="clear-link" id="clearBtn">Limpar histórico</button>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
